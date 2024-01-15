@@ -1,0 +1,12 @@
+commands used
+// initializing go mod
+go mod init github.com/goddhi/BOOK-MAAGEMENT-SYSTEM
+
+installed packages
+go get "github.com/jinzhu/gorm"  jinzhu/gorm is a popular Object-Relational Mapping (ORM) library in Go. It provides developers with a simple and efficient way to interact with databases by mapping Go structs to database tables. It supports a variety of database engines including MySQL, PostgreSQL, SQLite, and Microsoft SQL Server.
+
+
+go get "github.com/jinzhu/gorm/dialects/mysql"
+
+
+go get "github.com/gorilla/mux"
