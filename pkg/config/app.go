@@ -7,7 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// this main reason for this file is to return a variable caleed db so other files can interact with DB
+// this main reason for this file is to return a variable called db so other files can interact with DB
 
 var (
 	db * gorm.DB

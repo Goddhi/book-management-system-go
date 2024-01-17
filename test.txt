@@ -1,6 +1,6 @@
 commands used
 // initializing go mod
-go mod init github.com/goddhi/BOOK-MAAGEMENT-SYSTEM
+go mod init github.com/goddhi/book-management-system
 
 installed packages
 go get "github.com/jinzhu/gorm"  jinzhu/gorm is a popular Object-Relational Mapping (ORM) library in Go. It provides developers with a simple and efficient way to interact with databases by mapping Go structs to database tables. It supports a variety of database engines including MySQL, PostgreSQL, SQLite, and Microsoft SQL Server.
@@ -10,3 +10,23 @@ go get "github.com/jinzhu/gorm/dialects/mysql"
 
 
 go get "github.com/gorilla/mux"
+
+//
+
+
+package routes
+
+import (
+	// "github.com/gorilla/mux"
+	// "github.com/goddhi/book-maagement-system/pkg/controllers"
+	"github.com/goddhi/book-management-system/pkg/routes"
+	
+)
+
+var RegisterBookStoreRoutes = func(router *mux.Router) {  // function for the route
+	router.HandleFunc("/book/", controllers.GetBook).Methods("GET")
+	router.HandleFunc("/book/{bookId}", controllers.GetBookBYID).Methods("GET")
+	router.HandleFunc("/book/{bookId}", controllers.UpdateBook).Methods("UPDATE")
+	router.HandleFunc("/book/{bookId}", controllers.DeleteBook).Methods("DELETE")
+} 
+
