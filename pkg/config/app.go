@@ -13,7 +13,7 @@ var (
 	db * gorm.DB
 )
 
-func connect(){  // this functions helps to open connection with the mysql database 
+func Connect(){  // this functions helps to open connection with the mysql database 
 	d, err := gorm.Open("mysql", "goddhi:goddhipassword@12@/simplerest?chartset=utf8&parseTime=True&loc=Local") // specifying the database username, password, table name
 	if err != nil { // if an error occurs 
 		// In this example, if gorm.Open fails to  clonnect to the database, the function will panic, printing the error message and stopping the execution of the program.
