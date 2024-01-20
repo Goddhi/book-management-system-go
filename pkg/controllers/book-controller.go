@@ -46,12 +46,39 @@ func CreateBook(w http.ResponseWriter, r* http.Request){
 	w.Write(res)  // printing the result of the data to postman 
 }
 
-func DeleteBook(w http.Response, r* http.Request){
+func DeleteBookId(w http.ResponseWriter, r* http.Request){
 	vars := mux.Vars(r)  // using vars to access the request from the data
 	bookId := vars["bookId"] // placing the value into a variable
 	ID, err := strconv.ParseInt(bookId, 0,0) //converting the value of bookid into an int
 	if err != nil {
 		fmt.Print("error whilw passimg")
 	}
-	book = models.DeleteBook(ID) // passing the return variable as data    
+	book := models.DeleteBook(ID) // passing the return variable as data    
+	res, _ := json.Marshal(book) // converting the value into json
+	w.Header().Set("Content-Type",  "pkglication/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
+
+
+/// creating a function that update the book data
+func UpdateBook(w http.ResponseWriter, r *http.Request) { //
+	var UpdateBook = &models.Book{} // passing the book(struct) as a variable so we can create a new database table 
+	utils.Parsebody(r, UpdateBook)  // converting the  UpdateBook from a struct to byte so the database can utilize it
+	vars := mux.Vars(r)  /// passing the request value into a variable called vars
+	bookId := vars["bookId"]
+	ID, err := strconv.ParseInt(bookId, 0,0)// converting the string into an integer
+	if err != nil {
+		fmt.Println("error while parsing")
+	}
+	bookDetails, db := models.GetBookById(ID)
+	if UpdateBook.Name != "" {
+		bookDetails.Name = UpdateBook.Name
+	}
+	if UpdateBook.Author != "" {
+		bookDetails.Author = UpdateBook.Author
+	}
+	if UpdateBook.Publication != "" {
+		bookDetails.Publication = UpdateBook.Publication
+	}
 }
