@@ -22,5 +22,14 @@ func GetBook(w http.ResponseWriter, r *http.Request) {  // the GetBook function 
 }
 
 func GetBookById(w http.ResponseWriter, r *http.Request){
-	vars := mux.Vars(r) // assesing the book id t
+	// basically the below code means we are passisng the book id gotten from the request into the vars varible 
+	vars := mux.Vars(r) //This function is provided by the gorilla/mux package. It takes an http.Request object as an argument, which represents the current HTTP request being processed by the handler...... The line var := mux.Vars(r) in the context of a Go web server using the gorilla/mux package is used to extract the route variables from the URL
+	bookId := vars["bookId"] // the line bookId := vars["bookId"] is used to retrieve a path parameter from the URL
+	ID, err := strconv.ParseInt(bookId,0,0) // connverting the string gotten into an integer
+	if err != nil {
+		fmt.Println("error while parsing")  /// log out error when there is an error getting the book ID
+	}
+	bookDetails, _  := models.GetBookById(ID)  // returning the varible getBook and ignoring the db varible returned from the GetBookById function in module folder
+	
+
 }

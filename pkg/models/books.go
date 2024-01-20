@@ -36,6 +36,7 @@ func GetAllBooks() []Book{  //  function that get all books as slice(list) from 
 	return Books  // return a slice of Books
 }
 
+
 func GetBookById(Id int64) (*Book, *gorm.DB){
 	var getBook Book  // passing getBook variable as Book(struct)
 	db := db.Where("ID=?", Id).Find(&getBook) // using the db which is used to connect to the database to find ID = Id and then find the particular book 
@@ -43,8 +44,9 @@ func GetBookById(Id int64) (*Book, *gorm.DB){
 }
 
 
-func DeleteBookId(ID int64) Book {  // function that delete a book ID and returns the Book(struct)   
+func DeleteBook(ID int64) Book {  // function that delete a book ID and returns the Book(struct)   
 	var book Book // assingning book variable to the Book struct
 	db.Where("ID=?", ID).Delete(book) // using  db to delete a book ID
 	return book
 }
+
