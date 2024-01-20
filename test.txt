@@ -1,5 +1,5 @@
-The flow of this database is that the user interact with the route and then the route file connect to the controller file in which the controller connect with the database which the connection file is located in the model file..
-
+The flow of this web app is that the user interact with the route and then the route file connect to the controller file in which the controller connect with the database which the connection file is located in the model file..
+ 
 commands used
 // initializing go mod
 go mod init github.com/goddhi/book-management-system

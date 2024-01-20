@@ -30,6 +30,28 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 		fmt.Println("error while parsing")  /// log out error when there is an error getting the book ID
 	}
 	bookDetails, _  := models.GetBookById(ID)  // returning the varible getBook and ignoring the db varible returned from the GetBookById function in module folder
-	
+	res, _ := json.Marshal(bookDetails) // convertig the bookDetails(string) variable into json
+	w.Header().Set("Content-Type", "pkglication/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
 
+/// a function that creates a model/table in the database
+func CreateBook(w http.ResponseWriter, r* http.Request){
+	CreateBook := &models.Book{}  // passing the Book(struct) into a variable called CreateBook
+	utils.Parsebody(r, CreateBook) // passing the CreateBook(struct) as parameter so it that it can be converted into bytes of code easily understood from the databse
+	b := CreateBook.CreateBook()  /// returning the value of what was gotten from the datbase
+	res, _ := json.Marshal(b) /// converting the data gotten from the database into json 
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)  // printing the result of the data to postman 
+}
+
+func DeleteBook(w http.Response, r* http.Request){
+	vars := mux.Vars(r)  // using vars to access the request from the data
+	bookId := vars["bookId"] // placing the value into a variable
+	ID, err := strconv.ParseInt(bookId, 0,0) //converting the value of bookid into an int
+	if err != nil {
+		fmt.Print("error whilw passimg")
+	}
+	book = models.DeleteBook(ID) // passing the return variable as data    
 }

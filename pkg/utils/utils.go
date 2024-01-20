@@ -9,7 +9,7 @@ import (
 
 
 // The ParseBody function in the provided utils package is designed to parse the JSON payload from the body of an HTTP request and unmarshal it into a Go data structure. The function accepts two parameters:
-
+// this function basically converts json data into byte so the database can understand
 func Parsebody(r *http.Request, x interface{}){
 	if body, err :=  io.ReadAll(r.Body); err == nil {
 		if err := json.Unmarshal([]byte(body), x); err != nil {
