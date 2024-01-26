@@ -14,11 +14,11 @@ var NewBook models.Book // referencing the stuct Book from the models folder
 
 // creating a function that perForm get request of the list of books on the database and respond with the list of books
 func GetBook(w http.ResponseWriter, r *http.Request) {  // the GetBook function gets executed when a user points to /book route 
-	newBooks := models.GetAllBooks() // passing the GetAllBooks function gottten from the modeels file as a variable into newBooks
-	res, _ := json.Marshal(newBooks) // converts the data gotten from the databse into a json format
+	newBooks := models.GetAllBooks() //  calling the GetAllBooks function gottten from the models file and returning the Book slice as newBook variable
+	res, _ := json.Marshal(newBooks) // converts the data gotten from the database which is struct into a json format for the client or postman
 	w.Header().Set("Content-Type", "pkglication/json") // converting the header to a json format
 	w.WriteHeader(http.StatusOK) /// setting the response write header as status code 200
-	w.Write(res)  // reponding with the data gotten from the database to postman
+	w.Write(res)  // reponding with the data gotten from the database to postman or client
 }
 
 func GetBookById(w http.ResponseWriter, r *http.Request){
@@ -33,7 +33,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 	res, _ := json.Marshal(bookDetails) // convertig the bookDetails(struct) variable into json
 	w.Header().Set("Content-Type", "pkglication/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(res)
+	w.Write(res)  // ouput is written to the client or postman
 }
 
 /// a function that creates a model/table in the database
@@ -62,7 +62,7 @@ func DeleteBookId(w http.ResponseWriter, r* http.Request){
 
 
 /// creating a function that update the book data
-// the UpdateBook function is a combination of create function and update function
+// the UpdateBook function is a combination of create function and getBookID function
 func UpdateBook(w http.ResponseWriter, r *http.Request) { //
 	var UpdateBook = &models.Book{} // Here, a new variable UpdateBook is declared and initialized as a pointer to a new instance of the Book struct from the models package. This struct will be used to unmarshal the JSON payload from the request body and may not necessarily create a new database table, but rather is used to hold the data you want to update in an existing record.
 	utils.Parsebody(r, UpdateBook)  // the unmarshalling converts the JSON data from the request body into the struct
