@@ -32,7 +32,7 @@ func (b *Book) CreateBook() *Book{ // passing the Book(struct) as a parameter an
 
 func GetAllBooks() []Book{  //  function that get all books as slice(list) from the Book(stuct)
 	var Books []Book // creating a varaible Books with a data type of slice
-	db.Find(&Books)  // funding the lsit of Books in the database
+	db.Find(&Books)  // finding the lsit of Books in the database
 	return Books  // return a slice of Books
 }
 
