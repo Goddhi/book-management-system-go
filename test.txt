@@ -13,7 +13,7 @@ go get "github.com/jinzhu/gorm/dialects/mysql"
 
 go get "github.com/gorilla/mux"
 
-//
+// ask collins about this question how the database table got the name books 
 
 
 package routes
