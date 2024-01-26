@@ -63,9 +63,9 @@ func DeleteBookId(w http.ResponseWriter, r* http.Request){
 
 /// creating a function that update the book data
 func UpdateBook(w http.ResponseWriter, r *http.Request) { //
-	var UpdateBook = &models.Book{} // passing the book(struct) as a variable so we can create a new database table 
-	utils.Parsebody(r, UpdateBook)  // converting the  UpdateBook from a struct to byte so the database can utilize it
-	vars := mux.Vars(r)  /// passing the request value into a variable called vars
+	var UpdateBook = &models.Book{} // Here, a new variable UpdateBook is declared and initialized as a pointer to a new instance of the Book struct from the models package. This struct will be used to unmarshal the JSON payload from the request body and may not necessarily create a new database table, but rather is used to hold the data you want to update in an existing record.
+	utils.Parsebody(r, UpdateBook)  // the unmarshalling converts the JSON data from the request body into the struct
+	vars := mux.Vars(r)  /// The mux.Vars function extracts the route variables from the request. The result is a map where the keys are the variable names defined in the URL pattern, and the values are the corresponding segments from the URL.
 	bookId := vars["bookId"]
 	ID, err := strconv.ParseInt(bookId, 0,0)// converting the string into an integer
 	if err != nil {
@@ -80,5 +80,10 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) { //
 	}
 	if UpdateBook.Publication != "" {
 		bookDetails.Publication = UpdateBook.Publication
-	}
+	}  // note the update logic is happening in Golang
+	db.Save(&bookDetails)
+	res, _ := json.Marshal(bookDetails)
+	w.Header().Set("Content-Type", "pkglication/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res) //// writing the output of the code to postman
 }
